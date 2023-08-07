@@ -6,7 +6,7 @@ echo "Initializing Database Container and Configs"
 #Docker SQL commands
 sudo docker pull mysql:latest
 
-sudo docker run --name mysql-container -e MYSQL_ROOT_PASSORD=root -d mysql:latest
+sudo docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=root -d mysql:latest
 #Docker SQL Command Verification - Creating
 if [ $? -ne 0 ]; then
     sudo docker rm -f mysql-container
@@ -15,7 +15,9 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-sudo docker exec -i mysql-container mysql -u root -p sys < ./DatabaseBooks.sql
+sudo docker cp ./DatabaseBooks.sql mysql-container:/
+
+sudo docker exec mysql-container sh -c 'mysql -u root -proot mysql <  ./DatabaseBooks.sql'
 #Docker SQL Command Verification - Executing Script
 if [ $? -ne 0 ]; then
     sudo docker rm -f mysql-container
