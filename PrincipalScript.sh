@@ -7,6 +7,7 @@ echo "Initializing Database Container and Configs"
 sudo docker pull mysql:latest
 
 sudo docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=root -d mysql:latest
+sleep 10
 #Docker SQL Command Verification - Creating
 if [ $? -ne 0 ]; then
     sudo docker rm -f mysql-container
