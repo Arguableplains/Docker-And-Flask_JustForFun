@@ -27,8 +27,10 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "The SQL Container creation was successful"
+sleep 10
 
 echo "Initializing Main API Container"
+
 #Docker API commands
 
 sudo docker build -t the-sql-python-api-image .
@@ -49,6 +51,7 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "The API Container creation was successful"
+sleep 10
 
 echo "END - Everything was successful"
 
