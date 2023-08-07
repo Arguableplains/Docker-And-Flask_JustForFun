@@ -11,7 +11,7 @@ class DBC:
 
     def __enter__(self):
         try:
-            self.connection = pymysql.connect(host='mysql-container',user="root", password='root', port=3306, database='test')
+            self.connection = pymysql.connect(host='mysql-container',user="root", password='root', port=3306, database='TestingAPI')
             self.cursor = self.connection.cursor()
             return self
         
@@ -31,7 +31,7 @@ class DBC:
 
         with self.cursor as cursor:
 
-            my_query_inserting = "INSERT INTO Livraria (titulo, autor) VALUES (%s, %s)"
+            my_query_inserting = "INSERT INTO Library (title, author) VALUES (%s, %s)"
             data_tuple = (data["title"],data["author"])
 
             try:
@@ -44,7 +44,7 @@ class DBC:
 
         with self.cursor as cursor:
 
-            my_query_select = "SELECT * FROM Livraria"
+            my_query_select = "SELECT * FROM Library"
 
             try:
                 cursor.execute(my_query_select)
@@ -60,7 +60,7 @@ class DBC:
 
         with self.cursor as cursor:
             
-            my_query_select = f"SELECT * FROM Livraria WHERE ID = {search}"
+            my_query_select = f"SELECT * FROM Library WHERE ID = {search}"
 
             try:
                 cursor.execute(my_query_select)
@@ -76,7 +76,7 @@ class DBC:
 
         with self.cursor as cursor:
 
-            my_query_delete = f"DELETE FROM Livraria WHERE ID = {search}"
+            my_query_delete = f"DELETE FROM Library WHERE ID = {search}"
 
             try:
                 cursor.execute(my_query_delete)
@@ -88,7 +88,7 @@ class DBC:
 
         with self.cursor as cursor:
 
-            my_query_update = "UPDATE Livraria SET titulo = %s, autor = %s WHERE ID = %s"
+            my_query_update = "UPDATE Library SET title = %s, author = %s WHERE ID = %s"
             json_data_tuple = (json_data["title"], json_data["author"], search)
             
             try:
