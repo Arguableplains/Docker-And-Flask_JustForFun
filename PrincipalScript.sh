@@ -10,8 +10,8 @@ sudo docker exec -i mysql-container mysql -u root -p sys < ./DatabaseBooks.sql
 
 echo "Initializing Main API Container"
 #Docker API commands
-sudo docker build -t The-SQL-Python-api-image .
-sudo docker run -p 9000:5000 --link mysql-container --name pythonapi -d The-SQL-Python-api-image
+sudo docker build -t the-sql-python-api-image .
+sudo docker run -p 9000:5000 --link mysql-container --name pythonapi -d the-sql-Python-api-image
 
 echo "END"
 
