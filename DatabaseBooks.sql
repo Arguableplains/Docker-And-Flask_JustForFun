@@ -8,7 +8,7 @@ USE `TestingAPI`;
 PRIMARY KEY (`ID`)
   );
 
-INSERT INTO `Library` (titulo, autor) VALUES
+INSERT INTO `Library` (title, author) VALUES
 ('To Kill a Mockingbird', 'Harper Lee'),
 ('1984', 'George Orwell'),
 ('Pride and Prejudice', 'Jane Austen'),
