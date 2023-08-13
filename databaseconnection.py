@@ -14,17 +14,14 @@ class DBC:
         try:
             self.connection = pymysql.connect(host='mysql-container',user='root', password='root', port=3306, database='TestingAPI', auth_plugin_map={'root':'mysql_native_password'})
             self.cursor = self.connection.cursor()
-
             return self
         
         except Exception as e:
             logging.warning("There was a critical problem with the database connection \n\n\n" + "Error: " + str(e) + "\n\n\n")
-
             return
     
     def __exit__(self, exc_type, exc_val, exc_tb):
         if self.connection:
-            logging.warning("Commint and Closing connection.")
             self.connection.commit()
             self.connection.close()
 
@@ -40,8 +37,9 @@ class DBC:
 
             try:
                 cursor.execute(my_query_inserting, data_tuple)
-            except:
-                logging.warning("There was a problem on a data insertion!")
+
+            except Exception as e:
+                logging.warning("There was a problem on a data insertion! \n\n\n" + "Error: " + str(e) + "\n\n\n")
 
     #To select data
     def selecting_data(self):
@@ -53,10 +51,10 @@ class DBC:
             try:
                 cursor.execute(my_query_select)
                 rows = cursor.fetchall()
-
                 return rows
-            except:
-                logging.warning("There was a problem on a data selection!!")
+            
+            except Exception as e:
+                logging.warning("There was a problem on a data selection!! \n\n\n" + "Error: " + str(e) + "\n\n\n")
                 return
 
     #To select data with a serching clause
@@ -69,10 +67,10 @@ class DBC:
             try:
                 cursor.execute(my_query_select)
                 rows = cursor.fetchall()
-
                 return rows
-            except:
-                logging.warning(f"There was a problem on a data selection by the {search} id!!")
+            
+            except Exception as e:
+                logging.warning(f"There was a problem on a data selection by the {search} id!! \n\n\n" + "Error: " + str(e) + "\n\n\n")
                 return
 
     #To delete data
@@ -84,8 +82,9 @@ class DBC:
 
             try:
                 cursor.execute(my_query_delete)
-            except:
-                logging.warning(f"There was a problem on a data deletion by the {search} id!!")
+
+            except Exception as e:
+                logging.warning(f"There was a problem on a data deletion by the {search} id!! \n\n\n" + "Error: " + str(e) + "\n\n\n")
             
     #To update data
     def update_data(self, search, json_data):
@@ -97,5 +96,6 @@ class DBC:
             
             try:
                 cursor.execute(my_query_update, json_data_tuple)
-            except:
-                logging.warning(f"There was a problem on a data update by the {search} id!!")
+                
+            except Exception as e:
+                logging.warning(f"There was a problem on a data update by the {search} id!! \n\n\n" + "Error: " + str(e) + "\n\n\n")
