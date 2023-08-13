@@ -12,7 +12,7 @@ class DBC:
 
     def __enter__(self):
         try:
-            self.connection = pymysql.connect(host='mysql-container',user='root', password='root', port=3306, database='TestingAPI')
+            self.connection = pymysql.connect(host='mysql-container',user='root', password='root', port=3306, database='TestingAPI', auth_plugin_map={'root':'mysql_native_password'})
             self.cursor = self.connection.cursor()
 
             return self
