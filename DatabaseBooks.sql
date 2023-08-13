@@ -3,8 +3,8 @@ USE `TestingAPI`;
 
   CREATE TABLE `Library` (
 `ID` int NOT NULL AUTO_INCREMENT,
-`titulo` text,
-`autor` text,
+`title` text,
+`author` text,
 PRIMARY KEY (`ID`)
   );
 
