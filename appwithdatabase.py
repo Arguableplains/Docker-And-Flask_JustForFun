@@ -3,7 +3,12 @@ from databaseconnection import DBC
 
 app = Flask(__name__)
 
-#Utils
+#region Utils
+"""
+Here is where the responses from the database are formatted
+And sended as http get requests, for now, shown on the terminal
+or web navigator
+"""
 
 def json_formatter(response):
 
@@ -21,6 +26,11 @@ def json_formatter(response):
 
     return list_json_done
 
+#endregion
+
+#region Requests
+
+#Return all the Books saved
 @app.route('/books', methods=['GET'])
 def get_books():
 
@@ -28,14 +38,16 @@ def get_books():
         answer = db.selecting_data()
         return jsonify(json_formatter(answer))
 
+#Return a single book by ID
 @app.route('/books/<int:id>', methods=['GET'])
 def get_livros_id(id):
 
     with DBC() as db:
         answer = db.selecting_data_id(id)
         return jsonify(json_formatter(answer))
-
-@app.route('/books/<int:id>', methods=['PUT'])
+    
+#Update a single book by the ID - needs the whole json with all informations
+@app.route('/books/update/<int:id>', methods=['PUT'])
 def update_book(id):
 
     with DBC() as db:
@@ -44,6 +56,7 @@ def update_book(id):
 
     return get_books()
 
+#Add a single book to the database
 @app.route('/books/new', methods=['POST'])
 def insert_new_book():
 
@@ -52,7 +65,8 @@ def insert_new_book():
 
     return get_books()
 
-@app.route('/books/<int:id>', methods=['DELETE'])
+#Delete a single book by the ID
+@app.route('/books/delete/<int:id>', methods=['DELETE'])
 def excluir_livro(id):
 
     with DBC() as db:
@@ -60,4 +74,12 @@ def excluir_livro(id):
 
     return get_books()
 
+#endregion
+
+#Main Flask
 app.run(port=5000, host='0.0.0.0', debug=True)
+
+#port = web port which the api will listen to
+#host = principal IP endress where the API will be hosted (localhost in this case)
+#debug = this option enables the system responses from the API
+#        to be seen on terminal

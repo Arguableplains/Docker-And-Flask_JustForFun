@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "START"
+echo "START - OnLinux"
 
 echo "Initializing Database Container and Configs"
 #Docker SQL commands
@@ -11,7 +11,6 @@ sleep 10
 #Docker SQL Command Verification - Creating
 if [ $? -ne 0 ]; then
     sudo docker rm -f mysql-container
-    sudo docker image rm mysql:latest
     echo "There was an error while creating and starting the container"
     exit 1
 fi
@@ -19,16 +18,15 @@ fi
 sudo docker cp ./DatabaseBooks.sql mysql-container:/
 
 sudo docker exec mysql-container sh -c 'mysql -u root -proot mysql <  ./DatabaseBooks.sql'
-#Docker SQL Command Verification - Executing Script
+#Docker SQL Command Verification - Executing Script SQL
 if [ $? -ne 0 ]; then
     sudo docker rm -f mysql-container
-    sudo docker image rm mysql:latest
     echo "There was an error while running the SQL script into the Database Container"
     exit 1
 fi
 
 echo "The SQL Container creation was successful"
-sleep 10
+sleep 5
 
 echo "Initializing Main API Container"
 
@@ -42,7 +40,10 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-sudo docker run -p 9000:5000 --link mysql-container --name pythonapi -d the-sql-python-api-image
+echo "Enter the web port to make connections and requests to the API"
+read WEB_PORT
+
+sudo docker run -p $WEB_PORT:5000 --link mysql-container --name pythonapi -d the-sql-python-api-image
 #Docker SQL Command Verification - Executing Script
 if [ $? -ne 0 ]; then
     sudo docker rm -f pythonapi
@@ -52,8 +53,6 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "The API Container creation was successful"
-sleep 10
-
 echo "END - Everything was successful"
 
 

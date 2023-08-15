@@ -4,7 +4,7 @@ import json
 
 class DBC:
 
-    #Methods about actions before and after other methods
+    #Control Methods - They control the connections, committing and cursos to make actions inside the database
 
     def __init__(self):
         self.connection = None
@@ -25,7 +25,7 @@ class DBC:
             self.connection.commit()
             self.connection.close()
 
-    #Methods
+    #Main Methods
 
     #To insert data
     def inserting_data(self, data):
