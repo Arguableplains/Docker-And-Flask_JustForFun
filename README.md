@@ -6,7 +6,7 @@ HTTP requests:
     - GET - request to get all books available
 
     CURL:
-      curl http://localhost:9000/books/
+      curl http://localhost:9000/books
 
   /books/id
     - GET - request to get a single book
@@ -18,7 +18,7 @@ HTTP requests:
     - POST - request to post a new book and insert it into the database
 
     CURL:
-      curl -X POST http://localhost:9000/books/new/ -H "Content-Type:application/json"-d '{"author":"example", "id":1, "title":"example"}'
+      curl -X POST http://localhost:9000/books/new -H "Content-Type:application/json"-d '{"author":"example", "id":1, "title":"example"}'
 
   /books/delete/id
     - DELETE - request to delete an available book

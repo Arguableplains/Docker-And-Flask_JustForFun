@@ -40,7 +40,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-echo "Enter the web port to make connections and requests to the API"
+echo "Enter the web port for connections and requests to the API:"
 read WEB_PORT
 
 sudo docker run -p $WEB_PORT:5000 --link mysql-container --name pythonapi -d the-sql-python-api-image
