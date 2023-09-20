@@ -6,30 +6,30 @@ HTTP requests:
     - GET - request to get all books available
 
     CURL:
-      curl http://localhost:9000/books
+      curl http://localhost:your_choosen_web_port/books
 
   /books/id
     - GET - request to get a single book
 
     CURL:
-      curl http://localhost:9000/books/id
+      curl http://localhost:your_choosen_web_port/books/id
 
   /books/new
     - POST - request to post a new book and insert it into the database
 
     CURL:
-      curl -X POST http://localhost:9000/books/new -H "Content-Type:application/json"-d '{"author":"example", "id":1, "title":"example"}'
+      curl -X POST http://localhost:your_choosen_web_port/books/new -H "Content-Type:application/json"-d '{"author":"example", "id":1, "title":"example"}'
 
   /books/delete/id
     - DELETE - request to delete an available book
 
     CURL:
-      curl -X DELETE http://localhost:9000/books/delete/id -H "Content-Type:application/json"-d '{"author":"example", "id":1, "title":"example"}'
+      curl -X DELETE http://localhost:your_choosen_web_port/books/delete/id -H "Content-Type:application/json"-d '{"author":"example", "id":1, "title":"example"}'
 
   /books/update/id
     - PUT - request to update an available book
     
     CURL:
-      curl -X PUT http://localhost:9000/books/update/id -H "Content-Type:application/json"-d '{"author":"example", "id":1, "title":"example"}'
+      curl -X PUT http://localhost:your_choosen_web_port/books/update/id -H "Content-Type:application/json"-d '{"author":"example", "id":1, "title":"example"}'
 
 
